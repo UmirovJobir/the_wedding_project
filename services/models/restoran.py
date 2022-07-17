@@ -71,6 +71,7 @@ class TableModel(models.Model):
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     price = models.PositiveIntegerField(default=0)
+    image = models.ImageField(upload_to='table/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         super(TableModel, self).save(*args, **kwargs)

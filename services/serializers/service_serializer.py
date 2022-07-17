@@ -13,7 +13,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServiceModel
-        fields = ('category_type', 'name', 'type', 'price', 'image', 'file', 'description', 'event_type') 
+        fields = ('category_type', 'name', 'type', 'price', 'image', 'description', 'event_type') 
     
     def create(self, validated_data):
         category_type_data = validated_data.pop('category_type')
@@ -22,9 +22,7 @@ class ServiceSerializer(serializers.ModelSerializer):
             Category.objects.create(category_type=category, **category_d)
         return category
     
-class MenuSerializer(serializers.ModelSerializer):
-    # event_id = serializers.PrimaryKeyRelatedField(read_only=True)
-    
+class MenuSerializer(serializers.ModelSerializer):    
     class Meta:
         model = MenuModel
         fields = ('id', 'event_id', 'name', 'type', 'price', 'image')

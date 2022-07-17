@@ -18,7 +18,7 @@ class ServiceModel(models.Model):
     type = models.CharField(max_length=30)
     price = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='service/', blank=True, null=True)
-    file = models.FileField(upload_to='service/', blank=True, null=True)
+    # file = models.FileField(upload_to='service/', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -29,7 +29,7 @@ class ServiceModel(models.Model):
 
 
 class MenuModel(models.Model):
-    event_id = models.ForeignKey(EvantModel, on_delete=models.CASCADE)
+    event_id = models.ManyToManyField(EvantModel, blank=True)
     name = models.CharField(max_length=30)
     type = models.CharField(max_length=30)
     price = models.PositiveIntegerField(default=0)
