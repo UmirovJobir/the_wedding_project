@@ -2,7 +2,7 @@
 #!/bin/bash
 
 
-if [ "$POSTGRES_DB" = "wedding_db" ]
+if [ "$POSTGRES_DB" = "the_wedding_db" ]
 then
     echo "Waiting for postgres..."
 

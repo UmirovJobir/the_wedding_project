@@ -3,9 +3,9 @@ version: "3.8"
 services:
   wedding_data:
     image: postgres:10
-    container_name: wedding_data
+    container_name: the_wedding_data
     environment:
-      - POSTGRES_DB=wedding_db
+      - POSTGRES_DB=the_wedding_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
     volumes:

@@ -1,0 +1,27 @@
+name: Second Server Deploy
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Executing remote command
+      uses: appleboy/ssh-action@master
+      with:
+        host: 172.104.143.233
+        USERNAME: root
+        PASSWORD: jobir2000JOBIR
+        PORT: 22
+        script: |
+          cd ~
+          cd wedding_project
+          git pull
+          docker-compose down
+          docker-compose build
+          docker-compose up
+      
+      

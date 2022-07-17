@@ -51,6 +51,7 @@ class UserModel(AbstractUser):
     event_date = models.DateField(blank=True, null=True)
 
     USERNAME_FIELD = 'number'
+    REQUIRED_FIELDS = ['username']
 
     class Meta:
         ordering = ['-date_joined']

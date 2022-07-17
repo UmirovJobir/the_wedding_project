@@ -29,7 +29,7 @@ class ServiceModel(models.Model):
 
 
 class MenuModel(models.Model):
-    event_id = models.ForeignKey(EvantModel, on_delete=models.CASCADE)
+    event_id = models.ManyToManyField(EvantModel)
     name = models.CharField(max_length=30)
     type = models.CharField(max_length=30)
     price = models.PositiveIntegerField(default=0)
