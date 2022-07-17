@@ -23,7 +23,7 @@ class Order(models.Model):
     total_price = models.PositiveIntegerField(default=0, blank=True, null=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.user_id)
 
     class Meta:
          verbose_name_plural = "Заказы"

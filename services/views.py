@@ -78,7 +78,7 @@ class OrderView(generics.ListAPIView):
     def post(self, request):
         blacklist = BlacklistUser.objects.all()
         blacklist = blacklist.values("user_id_id")
-        user = self.request.user
+        user = self.request.user 
         list = []
         for black in blacklist:
             list.append(black['user_id_id'])
@@ -87,7 +87,7 @@ class OrderView(generics.ListAPIView):
         else:
             serializer = OrderPostSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.validated_data['user'] = self.request.user
+            serializer.validated_data['user_id'] = self.request.user
     
             total_price = 0
             # menu = MenuModel.objects.get(pk=request.data.get("menu"))
