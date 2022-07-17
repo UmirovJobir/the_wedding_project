@@ -9,9 +9,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./data:/var/lib/postgresql/data
   
-   
    
   app:
     build: .
