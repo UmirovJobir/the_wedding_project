@@ -1,6 +1,8 @@
 
+from django import views
 from rest_framework.response import Response
 from django.http import HttpResponseNotAllowed
+from rest_framework.views import APIView
 
 from services.models import SystemInfoModel, RestoranModel, BookedDate, EvantModel, ServiceModel, TableModel, MenuModel, Order
 
@@ -69,7 +71,7 @@ class MenuView(generics.ListAPIView):
         return MenuModel.objects.filter(event_id=events_id).all()
 
 
-class OrderView(generics.ListAPIView):
+class OrderView(APIView):
     serializer_class = OrderGetSerializer
     queryset = Order.objects.all()
     permission_classes = [permissions.IsAuthenticated]
