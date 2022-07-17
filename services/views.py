@@ -90,23 +90,22 @@ class OrderView(generics.ListAPIView):
             serializer.validated_data['user_id'] = self.request.user
     
             total_price = 0
-            # menu = MenuModel.objects.get(pk=request.data.get("menu"))
-            # gests_amount = request.data.get("gests_amount")
-            services = ServiceModel.objects.filter(pk__in=request.data.get('service')).all()
-            menus = MenuModel.objects.filter(pk__in=request.data.get('menu')).all()
+
+            services = ServiceModel.objects.filter(pk__in=request.data.get('service_id')).all()
+            menus = MenuModel.objects.filter(pk__in=request.data.get('menu_id')).all()
             for service in services:
                 total_price += service.price
             for menu in menus:
                 total_price += menu.price
-                serializer.validated_data['day'] = self.request.user.event_date
 
-                serializer.save(total_price=total_price, )
+            serializer.validated_data['day'] = self.request.user.event_date
+            serializer.save(total_price=total_price, )
 
-                restoran_id = request.data.get('restoran')
-                restoran = RestoranModel.objects.get(id=restoran_id)
-                date_user = self.request.user.event_date 
+            restoran_id = request.data.get('restoran_id')
+            restoran = RestoranModel.objects.get(id=restoran_id)
+            date_user = self.request.user.event_date 
 
-                BookedDate.objects.create(date=date_user, restoran_id=restoran)
+            BookedDate.objects.create(date=date_user, restoran_id=restoran)
         
-                return Response(data=serializer.data)
+            return Response(data=serializer.data)
 
