@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  wedding_data:
+    image: postgres:10
+    container_name: wedding_data
+    environment:
+      - POSTGRES_DB=wedding_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  
+   
+   
+  app:
+    build: .
+    container_name: wedding_app
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - wedding_data
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+volumes:
+    wedding_data:
+    app:
+
+
+
+
