@@ -23,7 +23,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         return category
     
 class MenuSerializer(serializers.ModelSerializer):
-    event_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    # event_id = serializers.PrimaryKeyRelatedField(read_only=True)
     
     class Meta:
         model = MenuModel
