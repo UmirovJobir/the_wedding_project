@@ -18,7 +18,7 @@ jobs:
         PORT: 22
         script: |
           cd ~
-          cd thr_wedding_project
+          cd the_wedding_project
           git pull
           docker-compose down
           docker-compose build
