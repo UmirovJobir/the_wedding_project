@@ -1,5 +1,9 @@
 
+from genericpath import exists
+import re
 from django import views
+from pyparsing import empty
+from requests import request
 from rest_framework.response import Response
 from django.http import HttpResponseNotAllowed
 from rest_framework.views import APIView
@@ -50,7 +54,11 @@ class RestoranView(generics.ListAPIView):
             city = self.request.user.city
             date = self.request.user.event_date
             events_id = self.request.query_params.get("id")
+            # if events_id is None:
+                # restorans = RestoranModel.objects.all()
+            # else:
             restorans = RestoranModel.objects.filter(event_id=events_id).all()
+            
             booked_dates = BookedDate.objects.filter(date=date).values_list('restoran_id_id', flat=True)
             if booked_dates.exists():
                 restorans = restorans.exclude(id__in=booked_dates)
@@ -73,6 +81,9 @@ class MenuView(generics.ListAPIView):
 
     def get_queryset(self):
         events_id = self.request.query_params.get("id")
+        print(events_id)
+        # if events_id is None:
+            # return MenuModel.objects.all()
         return MenuModel.objects.filter(event_id=events_id).all()
 
 
