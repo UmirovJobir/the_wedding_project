@@ -31,7 +31,9 @@ class SystemInfoModel(SingletonModel):
         return self.title
     
     class Meta:
-        verbose_name_plural = "Галерея"
+        verbose_name_plural = "Информация o сайте"
+
+    
 
 class SystemInfoFileModel(models.Model):
     # systeminfo_id = models.ForeignKey(SystemInfoModel, on_delete=models.CASCADE)
@@ -41,6 +43,6 @@ class SystemInfoFileModel(models.Model):
         return str(self.file)
 
     class Meta:
-        verbose_name_plural = "Информация o сайте"
+        verbose_name_plural = "Галерея"
 
 
