@@ -11,7 +11,7 @@ class BookedDateSerializer(serializers.ModelSerializer):
 class TableSerializer(serializers.ModelSerializer):
     class Meta:
         model = TableModel
-        fields = ('id', 'type', 'price')
+        fields = ('id', 'name', 'type', 'price')
 
 class RestoranSerializer(serializers.ModelSerializer):
     booked_dates = BookedDateSerializer(many=True)
