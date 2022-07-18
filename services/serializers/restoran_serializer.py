@@ -26,3 +26,4 @@ class EvantSerializer(serializers.ModelSerializer):
     class Meta:
         model = EvantModel
         fields = ('id', 'image', 'name', 'definition', 'active')
+
