@@ -6,6 +6,7 @@ from accounts.models import UserModel
 class EvantModel(models.Model):
     image = models.ImageField(upload_to='files/', blank=True)
     name = models.CharField(max_length=30)
+    definition = models.CharField(max_length=50)
     active = models.BooleanField()
 
     def save(self, *args, **kwargs):
