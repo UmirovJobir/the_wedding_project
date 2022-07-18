@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from django.http import HttpResponseNotAllowed
 from rest_framework.views import APIView
 
-from services.models import SystemInfoModel, RestoranModel, BookedDate, EvantModel, ServiceModel, TableModel, MenuModel, Order
+from services.models import SystemInfoModel, RestoranModel, BookedDate, EvantModel, ServiceModel, TableModel, MenuModel, Order, SystemInfoFileModel
 
-from services.serializers.system_serializer import SystemSerializer
+from services.serializers.system_serializer import SystemSerializer, SystemInfoFileSerializer
 from services.serializers.restoran_serializer import RestoranSerializer, EvantSerializer
 from services.serializers.service_serializer import ServiceSerializer, MenuSerializer
 from services.serializers.restoran_serializer import TableSerializer
@@ -29,6 +29,11 @@ class IsAdminUser(permissions.BasePermission):
 class SystemView(generics.ListAPIView):
     serializer_class = SystemSerializer 
     queryset = SystemInfoModel.objects.all()
+    permission_classes = [IsAdminUser]
+
+class SystemFileView(generics.ListAPIView):
+    serializer_class = SystemInfoFileSerializer 
+    queryset = SystemInfoFileModel.objects.all()
     permission_classes = [IsAdminUser]
 
 class TableView(generics.ListAPIView):

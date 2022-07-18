@@ -22,7 +22,8 @@ class SingletonModel(models.Model):
 class SystemInfoModel(SingletonModel):
     title = models.CharField(max_length=40)
     description = models.TextField()
-    
+    image = models.ImageField(upload_to='info/', blank=True, null=True)
+
     def save(self, *args, **kwargs):
         super(SystemInfoModel, self).save(*args, **kwargs)
 
@@ -33,8 +34,8 @@ class SystemInfoModel(SingletonModel):
         verbose_name_plural = "Информация o сайте"
 
 class SystemInfoFileModel(models.Model):
-    systeminfo_id = models.ForeignKey(SystemInfoModel, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='systeminfo/', blank=True)
+    # systeminfo_id = models.ForeignKey(SystemInfoModel, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='gallery/', blank=True)
 
     def __str__(self):
         return str(self.file)

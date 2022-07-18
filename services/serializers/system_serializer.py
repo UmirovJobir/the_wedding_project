@@ -11,25 +11,25 @@ class SystemInfoFileSerializer(serializers.ModelSerializer):
         model = SystemInfoFileModel
         fields = ('id', 'file',)
     
-    def validate_source(self, value):
-        if not value.endswith(".mp4"):
-            raise ValidationError(detail='Mp4 file is required')
-        return value
+    # def validate_source(self, value):
+    #     if not value.endswith(".mp4"):
+    #         raise ValidationError(detail='Mp4 file is required')
+    #     return value
 
 
 class SystemSerializer(serializers.HyperlinkedModelSerializer):
-    files = SystemInfoFileSerializer(source='systeminfofilemodel_set', many=True, read_only=True)
+    # files = SystemInfoFileSerializer(source='systeminfofilemodel_set', many=True, read_only=True)
 
     class Meta:
         model = SystemInfoModel
-        fields = ('id', 'title', 'description', 'files')
+        fields = ('id', 'title', 'description', 'image')
 
-    def create(self, validated_data):
-        files_data = self.context.get('view').request.FILES
-        print(files_data)
-        systeminfo = SystemInfoModel.objects.create(title=validated_data.get('title', 'no-title'), 
-                                         type=validated_data.get('type', 'no-type'), description=validated_data.get('description', 'no-description'))
-        for files_data in files_data.values():
-            SystemInfoFileModel.objects.create(systeminfo=systeminfo, file=files_data)
-        return systeminfo
+    # def create(self, validated_data):
+    #     files_data = self.context.get('view').request.FILES
+    #     print(files_data)
+    #     systeminfo = SystemInfoModel.objects.create(title=validated_data.get('title', 'no-title'), 
+    #                                      type=validated_data.get('type', 'no-type'), description=validated_data.get('description', 'no-description'))
+    #     for files_data in files_data.values():
+    #         SystemInfoFileModel.objects.create(systeminfo=systeminfo, file=files_data)
+    #     return systeminfo
 

@@ -13,11 +13,16 @@ import nested_admin
 admin.site.unregister(Group)
 
 
-class SystemInfoFileInline(nested_admin.NestedStackedInline):
-    model = SystemInfoFileModel
-class SystemInfoAdmin(nested_admin.NestedModelAdmin):
-    inlines = [SystemInfoFileInline,]
-admin.site.register(SystemInfoModel, SystemInfoAdmin)
+# class SystemInfoFileInline(nested_admin.NestedStackedInline):
+#     model = SystemInfoFileModel
+# class SystemInfoAdmin(nested_admin.NestedModelAdmin):
+#     inlines = [SystemInfoFileInline,]
+# admin.site.register(SystemInfoModel, SystemInfoAdmin)
+
+admin.site.register(SystemInfoModel)
+
+admin.site.register(SystemInfoFileModel)
+
 
 admin.site.register(EvantModel)
 
