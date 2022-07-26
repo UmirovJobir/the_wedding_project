@@ -18,8 +18,6 @@ class SystemInfoFileSerializer(serializers.ModelSerializer):
 
 
 class SystemSerializer(serializers.HyperlinkedModelSerializer):
-    # files = SystemInfoFileSerializer(source='systeminfofilemodel_set', many=True, read_only=True)
-
     class Meta:
         model = SystemInfoModel
         fields = ('id', 'title', 'description', 'image')

@@ -6,18 +6,18 @@ from services.models.service import ServiceModel, Category, MenuModel
 from services.models.restoran import TableModel, RestoranModel, BookedDate, EvantModel
 from services.models.order import Order
 from django.contrib.auth.models import Group
+admin.site.unregister(Group)
 
 import nested_admin
 
+@admin.action(description='Mark selected stories as published')
+def make_published(modeladmin, request, queryset):
+    queryset.update(status='Canceled')
 
-admin.site.unregister(Group)
-
-
-# class SystemInfoFileInline(nested_admin.NestedStackedInline):
-#     model = SystemInfoFileModel
-# class SystemInfoAdmin(nested_admin.NestedModelAdmin):
-#     inlines = [SystemInfoFileInline,]
-# admin.site.register(SystemInfoModel, SystemInfoAdmin)
+class OrderAdmin(admin.ModelAdmin):
+    # list_display = ['user_id', 'day']
+    actions = [make_published]
+admin.site.register(Order, OrderAdmin)
 
 admin.site.register(SystemInfoModel)
 
@@ -38,4 +38,4 @@ class CategoryAdmin(nested_admin.NestedModelAdmin):
     inlines = [ServicesInline,]
 admin.site.register(Category, CategoryAdmin)
 
-admin.site.register(Order)
+# admin.site.register(Order)

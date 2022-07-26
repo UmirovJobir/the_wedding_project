@@ -32,7 +32,7 @@ class IsAdminUser(permissions.BasePermission):
 
 class SystemView(generics.ListAPIView):
     serializer_class = SystemSerializer 
-    queryset = SystemInfoModel.objects.all()
+    queryset = SystemInfoModel.objects.all().first()
     permission_classes = [IsAdminUser]
 
 class SystemFileView(generics.ListAPIView):
@@ -97,6 +97,9 @@ class OrderView(APIView):
         blacklist = BlacklistUser.objects.all()
         blacklist = blacklist.values("user_id_id")
         user = self.request.user 
+
+        print(user)
+        
         list = []
         for black in blacklist:
             list.append(black['user_id_id'])
@@ -117,13 +120,20 @@ class OrderView(APIView):
                 total_price += menu.price
 
             serializer.validated_data['day'] = self.request.user.event_date
-            serializer.save(total_price=total_price, )
+            # serializer.save(total_price=total_price, )
 
             restoran_id = request.data.get('restoran_id')
             restoran = RestoranModel.objects.get(id=restoran_id)
             date_user = self.request.user.event_date 
 
-            BookedDate.objects.create(date=date_user, restoran_id=restoran)
-        
-            return Response(data=serializer.data)
+            print(restoran_id)
+            print(restoran)
+
+            if (BookedDate.objects.filter(date=date_user, restoran_id=restoran).exists()):
+                return HttpResponseNotAllowed("not allowed")
+            else:
+                BookedDate.objects.create(date=date_user, restoran_id=restoran)
+                
+                serializer.save(total_price=total_price, )
+                return Response(data=serializer.data)
 

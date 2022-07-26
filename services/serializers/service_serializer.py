@@ -13,7 +13,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServiceModel
-        fields = ('category_type', 'name', 'type', 'price', 'image', 'description', 'event_type') 
+        fields = ('id', 'category_type', 'name', 'type', 'price', 'image', 'description', 'event_type') 
     
     def create(self, validated_data):
         category_type_data = validated_data.pop('category_type')

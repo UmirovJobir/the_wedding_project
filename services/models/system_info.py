@@ -36,7 +36,6 @@ class SystemInfoModel(SingletonModel):
     
 
 class SystemInfoFileModel(models.Model):
-    # systeminfo_id = models.ForeignKey(SystemInfoModel, on_delete=models.CASCADE)
     file = models.FileField(upload_to='gallery/', blank=True)
 
     def __str__(self):
