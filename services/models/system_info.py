@@ -28,7 +28,7 @@ class SystemInfoModel(SingletonModel):
         super(SystemInfoModel, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     class Meta:
         verbose_name_plural = "Информация o сайте"
