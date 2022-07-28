@@ -17,7 +17,7 @@ class SystemInfoFileSerializer(serializers.ModelSerializer):
     #     return value
 
 
-class SystemSerializer(serializers.HyperlinkedModelSerializer):
+class SystemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SystemInfoModel
         fields = ('id', 'title', 'description', 'image')
