@@ -32,7 +32,7 @@ class IsAdminUser(permissions.BasePermission):
 
 class SystemView(generics.ListAPIView):
     serializer_class = SystemSerializer 
-    queryset = SystemInfoModel.objects.all().first()
+    queryset = SystemInfoModel.objects.all()
     permission_classes = [IsAdminUser]
 
 class SystemFileView(generics.ListAPIView):
