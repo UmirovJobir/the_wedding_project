@@ -2,18 +2,18 @@
 #!/bin/bash
 
 
-# if [ "$POSTGRES_DB" = "wedding_db" ]
-# then
-#     echo "Waiting for postgres..."
+if [ "$POSTGRES_DB" = "wedding_db" ]
+then
+    echo "Waiting for postgres..."
 
-#     while ! nc -z $SQL_HOST $SQL_PORT; do
-#       sleep 0.1
-#     done
+    while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+      sleep 0.1
+    done
 
-#     echo "PostgreSQL started"
-# fi
+    echo "PostgreSQL started"
+fi
 
-# sleep 10
+sleep 10
 
 echo "Chmod entrypoint.sh"
 chmod +x entrypoint.sh
