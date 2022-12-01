@@ -6,8 +6,8 @@ WORKDIR /app
 COPY requirements.txt ./app
 COPY . . 
 
-# RUN apt-get update \
-#     && apt-get install -yyq netcat
+RUN apt-get update \
+    && apt-get install -yyq netcat
 
 RUN chmod +x entrypoint.sh
 RUN pip install -r requirements.txt
