@@ -1,36 +1,31 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  web:
+  django:
     build: .
+    container_name: django
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     depends_on:
-      - wedding_data
+      - pgdb
     env_file:
       - .env
-    
 
-  wedding_data:
+
+  pgdb:
     image: postgres:11
-    container_name: the_wedding_data
+    container_name: pgdb
     environment:
-      - POSTGRES_DB=wedding_db
+      - POSTGRES_DB=strategy_agency
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
-      - POSTGRES_HOST=wedding_data
+      - POSTGRES_HOST=pgdb
       - POSTGRES_PORT=5432
     volumes:
       - ./data:/var/lib/postgresql/data
 
 volumes:
-    wedding_data:
-    web:
-
-
-
-
-
-
+    django:
+    pgdb:
