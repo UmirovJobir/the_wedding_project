@@ -2,7 +2,7 @@
 #!/bin/bash
 
 
-if [ "$POSTGRES_DB" = "the_wedding_db" ]
+if [ "$POSTGRES_DB" = "wedding_db" ]
 then
     echo "Waiting for postgres..."
 
@@ -13,8 +13,22 @@ then
     echo "PostgreSQL started"
 fi
 
-python3 manage.py makemigrations
+sleep 10
+
+echo "Chmod entrypoint.sh"
+chmod +x entrypoint.sh
+
+echo "Apply database migrations"
 python3 manage.py migrate
+
+# echo "collectstatic"
+# python3 manage.py collectstatic
+
+echo "initadmin"
+python3 manage.py initadmin
+
+echo "Starting server"
+python3 manage.py runserver --insecure 0.0.0.0:8000
 
 exec "$@"
 

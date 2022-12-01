@@ -5,16 +5,18 @@ services:
     image: postgres:10
     container_name: the_wedding_data
     environment:
-      - POSTGRES_DB=the_wedding_db
+      - POSTGRES_DB=wedding_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
+      - POSTGRES_HOST=wedding_data
+      - POSTGRES_PORT=5432
     volumes:
       - ./data:/var/lib/postgresql/data
   
    
-  app:
+  web:
     build: .
-    container_name: wedding_app
+    # container_name: wedding_app
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - wedding_data
@@ -22,10 +24,12 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    volumes:
+      - .:/app
 
 volumes:
     wedding_data:
-    app:
+    web:
 
 
 
