@@ -2,11 +2,11 @@
 #!/bin/bash
 
 
-if [ "$POSTGRES_DB" = "wedding_db" ]
+if [ "$DATABASE" = "wedding_db" ]
 then
     echo "Waiting for postgres..."
 
-    while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+    while ! nc -z $SQL_HOST $SQL_PORT; do
       sleep 0.1
     done
 
