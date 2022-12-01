@@ -3,6 +3,7 @@ version: "3.8"
 services:
   web:
     build: .
+    command: bash -c 'while !</dev/tcp/wedding_data/5432; do sleep 1; done; npm start'
     volumes:
       - .:/app
     ports:
@@ -20,10 +21,12 @@ services:
       - POSTGRES_DB=wedding_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
-      - POSTGRES_HOST=wedding_data
-      - POSTGRES_PORT=5432
+      # - POSTGRES_HOST=wedding_data
+      # - POSTGRES_PORT=5432
     volumes:
       - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 volumes:
     wedding_data:
