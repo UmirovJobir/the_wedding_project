@@ -13,6 +13,7 @@ then
     echo "PostgreSQL started"
 fi
 
+
 sleep 10
 
 echo "Chmod entrypoint.sh"
