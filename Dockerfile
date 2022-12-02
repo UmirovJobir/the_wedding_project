@@ -2,8 +2,8 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /usr/src/app
-COPY requirements.txt ./
+WORKDIR /app
+COPY requirements.txt /app
 COPY . . 
 
 RUN apt-get update \
@@ -11,8 +11,6 @@ RUN apt-get update \
 
 RUN pip uninstall django
 RUN pip install -r requirements.txt
-
-RUN chmod +x entrypoint.sh
 
 EXPOSE 8000
 
