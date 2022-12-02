@@ -13,7 +13,6 @@ services:
     env_file:
       - .env
 
-
   pgdb:
     image: postgres:11
     container_name: pgdb
