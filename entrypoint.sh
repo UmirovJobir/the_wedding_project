@@ -1,35 +1,29 @@
-
 #!/bin/bash
 
 
-if [ "$POSTGRES_DB" = "wedding_db" ]
+if [ "$DATABASE" = "wedding_db" ]
 then
     echo "Waiting for postgres..."
 
-    while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+    while ! nc -z $SQL_HOST $SQL_PORT; do
       sleep 0.1
     done
 
     echo "PostgreSQL started"
 fi
 
-
 sleep 10
-
-echo "Chmod entrypoint.sh"
-chmod +x entrypoint.sh
 
 echo "Apply database migrations"
 python3 manage.py migrate
 
-# echo "collectstatic"
+echo "collectstatic"
 python3 manage.py collectstatic
 
-echo "initadmin"
-python3 manage.py initadmin
+# echo "initadmin"
+# python3 create_admin.py
 
 echo "Starting server"
 python3 manage.py runserver --insecure 0.0.0.0:8000
 
 exec "$@"
-
